@@ -28,8 +28,7 @@ from sklearn.metrics import confusion_matrix, f1_score
 
 
 #from collection import counter
-from DataPrep.py import data_TrainNews
-from DataPrep.py import data_TestNews
+from DataPrep.py import *
 import numpy as np
 import pandas as pd
 
