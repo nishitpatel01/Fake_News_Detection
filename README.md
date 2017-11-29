@@ -46,6 +46,4 @@ Fake News Detection in Python
 
 	v1.0 04/23/2017
 
-	Below is the process of building features and classifiers for prediction:
 	
-	![Alt text] https://raw.githubusercontent.com/nishitpatel01/fake_news_detection_dev/master/Project%20-%20cs410.jpg
