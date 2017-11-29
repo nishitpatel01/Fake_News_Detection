@@ -48,4 +48,4 @@ Fake News Detection in Python
 
 	Below is the process of building features and classifiers for prediction:
 	
-	![Alt text] https://github.com/nishitpatel01/fake_news_detection_dev/blob/master/Project%20-%20cs410.jpg
+	![Alt text] https://raw.githubusercontent.com/nishitpatel01/fake_news_detection_dev/master/Project%20-%20cs410.jpg
