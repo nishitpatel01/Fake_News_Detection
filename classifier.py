@@ -20,8 +20,9 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import  LogisticRegression
 from sklearn.linear_model import SGDClassifier
 from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import KFold
-from sklearn.metrics import confusion_matrix, f1_score
+from sklearn import metrics #confusion_matrix, f1_score
 
 
 #file read (needs to be removed in final version)
@@ -178,6 +179,9 @@ np.mean(predicted_LogR == test_news['Label'])
 #accuracy = 0.62
 
 
+x = logR_pipeline_ngram.predict_proba(doc_new)
+print(x[:0])
+
 svm_pipeline_ngram = Pipeline([
         ('svmCV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
         ('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
@@ -192,9 +196,11 @@ np.mean(predicted_svm == test_news['Label'])
 
 
 svm2_pipeline_ngram = Pipeline([
-         ('svm2CV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
-         ('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
-         ('svm2_clf',SGDClassifier(loss='hinge',penalty='l2',alpha=1e-3, n_iter=5))
+         #('svm2CV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
+         ('svm2CV',CountVectorizer()),
+         #('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
+         ('tfidf',TfidfTransformer()),
+         ('svm2clf',SGDClassifier(loss='hinge',penalty='l2',alpha=1e-3, n_iter=5))
          ])
 
 svm2_pipeline_ngram.fit(train_news['Statement'],train_news['Label'])
@@ -205,13 +211,23 @@ predicted_svm2 = svm2_pipeline_ngram.predict(test_news['Statement'])
 np.mean(predicted_svm2 == test_news['Label'])
 #accurary = 0.57
 
+randon_forest_ngram = Pipeline([
+        ('rfCV',CountVectorizer()),
+        ('tfidf',TfidfTransformer()),
+        ('rf_clf',RandomForestClassifier(n_estimators=100,n_jobs=3))
+        ])
+    
+randon_forest_ngram.fit(train_news['Statement'],train_news['Label'])
+predicted_rf = randon_forest_ngram.predict(test_news['Statement'])
+np.mean(predicted_rf == test_news['Label'])
+
 
 #K-fold cross validation for all classifiers
 build_confusion_matrix(nb_pipeline_ngram)
 build_confusion_matrix(logR_pipeline_ngram)
 build_confusion_matrix(svm_pipeline_ngram)
 build_confusion_matrix(svm2_pipeline_ngram)
-
+build_confusion_matrix(randon_forest_ngram)
 
 #========================================================================================
 #n-grams & tfidf confusion matrix and F1 scores
@@ -238,19 +254,24 @@ build_confusion_matrix(svm2_pipeline_ngram)
 #=========================================================================================
 
 
+print(metrics.classification_report(test_news['Label'], predicted_nb_ngram))
+
+print(metrics.classification_report(test_news['Label'], svm_pipeline_ngram))
+print(metrics.classification_report(test_news['Label'], svm2_pipeline_ngram))
+
 
 #grid-search parameter optimization
-parameters = {'vect__ngram_range': [(1, 1), (1, 2),(1,3)],
+parameters = {'svm2CV__ngram_range': [(1, 1), (1, 2),(1,3)],
                'tfidf__use_idf': (True, False),
-               'clf__alpha': (1e-2, 1e-3),
+               'svm2clf__alpha': (1e-2, 1e-3),
 }
 
-gs_clf = GridSearchCV(nb_pipeline_ngram, parameters, n_jobs=-1)
-gs_clf = gs_clf.fit(train_news['Statement'],train_news['Label'])
+gs_clf = GridSearchCV(svm2_pipeline_ngram, parameters, n_jobs=-1)
+gs_clf = gs_clf.fit(train_news['Statement'][:400],train_news['Label'][:400])
 
 
 gs_clf.best_score_
 gs_clf.best_params_
-
+gs_clf.cv_results_
 
 
