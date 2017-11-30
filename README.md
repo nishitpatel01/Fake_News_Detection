@@ -45,3 +45,5 @@ Fake News Detection in Python
 	William Wang, william@cs.ucsb.edu
 
 	v1.0 04/23/2017
+
+	
