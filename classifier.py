@@ -44,8 +44,8 @@ nb_pipeline.fit(train_news['Statement'],train_news['Label'])
 doc_new = ['obama is running for president in 2016']
 
 nb_pipeline.predict(doc_new)
-predicted_nb = nb_pipeline.predict(test_news['Statement'])
-np.mean(predicted_nb == test_news['Label'])
+predicted_nb = nb_pipeline.predict(train_news['Statement'])
+np.mean(predicted_nb == train_news['Label'])
 #accuracy = 0.61
 
 
@@ -57,9 +57,8 @@ logR_pipeline = Pipeline([
 
 logR_pipeline.fit(train_news['Statement'],train_news['Label'])
 
-logR_pipeline.predict(doc_new)
-predicted_LogR = logR_pipeline.predict(test_news['Statement'])
-np.mean(predicted_LogR == test_news['Label'])
+predicted_LogR = logR_pipeline.predict(train_news['Statement'])
+np.mean(predicted_LogR == train_news['Label'])
 #accuracy = 0.61
 
 
@@ -71,9 +70,8 @@ svm_pipeline = Pipeline([
 
 svm_pipeline.fit(train_news['Statement'],train_news['Label'])
 
-svm_pipeline.predict(doc_new)
-predicted_svm = svm_pipeline.predict(test_news['Statement'])
-np.mean(predicted_svm == test_news['Label'])
+predicted_svm = svm_pipeline.predict(train_news['Statement'])
+np.mean(predicted_svm == train_news['Label'])
 #accuracy = 0.56
 
 #using SVM Stochastic Gradient Descent on hinge loss
@@ -86,8 +84,8 @@ svm2_pipeline.fit(train_news['Statement'],train_news['Label'])
 
 svm2_pipeline.predict(doc_new)
 
-predicted_svm2 = svm2_pipeline.predict(test_news['Statement'])
-np.mean(predicted_svm2 == test_news['Label'])
+predicted_svm2 = svm2_pipeline.predict(train_news['Statement'])
+np.mean(predicted_svm2 == train_news['Label'])
 #accurary = 0.58
 
 
@@ -114,6 +112,7 @@ def build_confusion_matrix(classifier):
     
     return (print('Total statements classified:', len(train_news)),
     print('Score:', sum(scores)/len(scores)),
+    print('score length', len(scores)),
     print('Confusion matrix:'),
     print(confusion))
     
@@ -122,7 +121,6 @@ build_confusion_matrix(nb_pipeline)
 build_confusion_matrix(logR_pipeline)
 build_confusion_matrix(svm_pipeline)
 build_confusion_matrix(svm2_pipeline)
-
 
 #========================================================================================
 #Bag of words confusion matrix and F1 scores
@@ -153,8 +151,8 @@ build_confusion_matrix(svm2_pipeline)
 """Usinng n-grams, stopwords etc """
 ##Now using n-grams
 nb_pipeline_ngram = Pipeline([
-        ('NBCV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
-        ('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
+        #('NBCV',countV_ngram),
+        ('tfidf',tfidf_ngram),
         ('nb_clf',MultinomialNB())])
 
 nb_pipeline_ngram.fit(train_news['Statement'],train_news['Label'])
@@ -167,59 +165,59 @@ np.mean(predicted_nb_ngram == test_news['Label'])
 
 
 logR_pipeline_ngram = Pipeline([
-        ('LogRCV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
-        ('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
+        #('LogRCV',countV_ngram),
+        ('tfidf',tfidf_ngram),
         ('LogR_clf',LogisticRegression())
         ])
 
 logR_pipeline_ngram.fit(train_news['Statement'],train_news['Label'])
 
-predicted_LogR = logR_pipeline_ngram.predict(test_news['Statement'])
-np.mean(predicted_LogR == test_news['Label'])
+predicted_LogR = logR_pipeline_ngram.predict(train_news['Statement'])
+np.mean(predicted_LogR == train_news['Label'])
 #accuracy = 0.62
 
 
-x = logR_pipeline_ngram.predict_proba(doc_new)
-print(x[:0])
+#x = logR_pipeline_ngram.predict_proba(doc_new)
+#print(x[:0])
 
 svm_pipeline_ngram = Pipeline([
-        ('svmCV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
-        ('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
+       # ('svmCV',countV_ngram),
+        ('tfidf',tfidf_ngram),
         ('svm_clf',svm.SVC())
         ])
 
 svm_pipeline_ngram.fit(train_news['Statement'],train_news['Label'])
 
-predicted_svm = svm_pipeline_ngram.predict(test_news['Statement'])
-np.mean(predicted_svm == test_news['Label'])
+predicted_svm = svm_pipeline_ngram.predict(train_news['Statement'])
+np.mean(predicted_svm == train_news['Label'])
 #accuracy = 0.56
 
 
 svm2_pipeline_ngram = Pipeline([
-         #('svm2CV',CountVectorizer(ngram_range=(1,3),stop_words='english')),
-         ('svm2CV',CountVectorizer()),
-         #('tfidf',TfidfTransformer(use_idf=True,smooth_idf=True)),
-         ('tfidf',TfidfTransformer()),
-         ('svm2clf',SGDClassifier(loss='hinge',penalty='l2',alpha=1e-3, n_iter=5))
+         #('svm2CV',countV_ngram),
+         ('tfidf',tfidf_ngram),
+         ('svm2clf',SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, n_iter=5))
          ])
 
 svm2_pipeline_ngram.fit(train_news['Statement'],train_news['Label'])
 
 svm2_pipeline_ngram.predict(doc_new)
 
-predicted_svm2 = svm2_pipeline_ngram.predict(test_news['Statement'])
-np.mean(predicted_svm2 == test_news['Label'])
+predicted_svm2 = svm2_pipeline_ngram.predict(train_news['Statement'])
+np.mean(predicted_svm2 == train_news['Label'])
 #accurary = 0.57
 
-randon_forest_ngram = Pipeline([
-        ('rfCV',CountVectorizer()),
-        ('tfidf',TfidfTransformer()),
+
+
+random_forest_ngram = Pipeline([
+        #('rfCV',countV_ngram),
+        ('tfidf',tfidf_ngram),
         ('rf_clf',RandomForestClassifier(n_estimators=100,n_jobs=3))
         ])
     
-randon_forest_ngram.fit(train_news['Statement'],train_news['Label'])
-predicted_rf = randon_forest_ngram.predict(test_news['Statement'])
-np.mean(predicted_rf == test_news['Label'])
+random_forest_ngram.fit(train_news['Statement'],train_news['Label'])
+predicted_rf = random_forest_ngram.predict(train_news['Statement'])
+np.mean(predicted_rf == train_news['Label'])
 
 
 #K-fold cross validation for all classifiers
@@ -227,7 +225,7 @@ build_confusion_matrix(nb_pipeline_ngram)
 build_confusion_matrix(logR_pipeline_ngram)
 build_confusion_matrix(svm_pipeline_ngram)
 build_confusion_matrix(svm2_pipeline_ngram)
-build_confusion_matrix(randon_forest_ngram)
+build_confusion_matrix(random_forest_ngram)
 
 #========================================================================================
 #n-grams & tfidf confusion matrix and F1 scores
