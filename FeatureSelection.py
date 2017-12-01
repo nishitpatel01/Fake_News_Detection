@@ -40,7 +40,7 @@ test_news = pd.read_csv(test_filename)
 
 #we will start with simple bag of words technique 
 #creating feature vector - document term matrix
-countV = CountVectorizer(stop_words='english')
+countV = CountVectorizer()
 train_count = countV.fit_transform(train_news['Statement'])
 
 #print training doc term matrix
@@ -61,28 +61,14 @@ tfidfV = TfidfTransformer()
 train_tfidf = tfidfV.fit_transform(train_count)
 train_tfidf.shape
 
-
 #get train data feature names 
 print(train_tfidf.A[:10])
 
 
-#build classifier
-#naive bayes
-nb_clf = MultinomialNB().fit(train_tfidf,train_news['Label'])
-
-docs_new = ["hillary is running for president", "hillary clinton is running for president","obama was born in kenya"]
-train_new_count = countV.transform(docs_new)
-train_new_tfidf = tfidfV.transform(train_new_count)
-
-pred = nb_clf.predict(train_new_tfidf)
-
-for doc, category in zip(docs_new, pred):
-     print('%r => %s' % (doc, pred))
-
-print(docs_new,pred)
-
-
-
+#bag of words - with n-grams
+#countV_ngram = CountVectorizer(ngram_range=(1,3),stop_words='english')
+#tfidf_ngram  = TfidfTransformer(use_idf=True,smooth_idf=True)
+tfidf_ngram = TfidfVectorizer(stop_words='english',ngram_range=(1,3),use_idf=True,smooth_idf=True)
 
 
 #Usinng Word2Vec 
@@ -147,6 +133,4 @@ svm2_pipeline_w2v_tfidf = Pipeline([
          ])
 
 
-
-"""
 
