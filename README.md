@@ -1,6 +1,18 @@
-# fake_news_detection_dev
+# Fake News Detection
+
 Fake News Detection in Python
 
+This project is part of CS410:Text Information System course. We have used various natural language processing and machine learning libaries from python. 
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them:
+
+Dataet used:
 	-- The data source used for this project is from LIAR dataset which has 3 files with .tsv format for test, train and validation. Below is some description about the data files used for this project.
 	
 	
@@ -27,23 +39,66 @@ Fake News Detection in Python
 	Column 14: the context (venue / location of the speech or statement).
 
 
-	Note that we do not provide the full-text verdict report in this current version of the dataset,
-	but you can use the following command to access the full verdict report and links to the source documents:
-	wget http://www.politifact.com//api/v/2/statement/[ID]/?format=json
 
-	======================================================================
-	The original sources retain the copyright of the data.
+```
+Give examples
+```
 
-	Note that there are absolutely no guarantees with this data,
-	and we provide this dataset "as is",
-	but you are welcome to report the issues of the preliminary version
-	of this data.
+### Installing
 
-	You are allowed to use this dataset for research purposes only.
+A step by step series of examples that tell you have to get a development env running
 
-	For more question about the dataset, please contact:
-	William Wang, william@cs.ucsb.edu
+Say what the step will be
 
-	v1.0 04/23/2017
+```
+Give the example
+```
 
-	
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+
+
+## Contributing
+
+
+
+## Versioning
+
+
+## License
+
+
+
+## Acknowledgments
