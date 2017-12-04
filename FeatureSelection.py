@@ -9,71 +9,110 @@ of unstructured data into some uniform set of attributes that an algorithm can u
 word counts (bag of words). 
 
 """
-from DataPrep.py import *
+#from DataPrep.py import *
+import DataPrep
+
+import pandas as pd
+import numpy as np
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
-from nltk.corpus import stopwords
+import nltk
+import nltk.corpus 
 from nltk.tokenize import word_tokenize
 
 from gensim.models.word2vec import Word2Vec
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.linear_model import  LogisticRegression
-from sklearn.linear_model import SGDClassifier
-from sklearn import svm
-from sklearn.cross_validation import KFold
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import confusion_matrix, f1_score
-
-#from collection import counter
-
-
-#file read (needs to be removed in final version)
-test_filename = 'test.csv'
-train_filename = 'train.csv'
-
-train_news = pd.read_csv(train_filename)
-test_news = pd.read_csv(test_filename)
 
 
 #we will start with simple bag of words technique 
 #creating feature vector - document term matrix
 countV = CountVectorizer()
-train_count = countV.fit_transform(train_news['Statement'])
+train_count = countV.fit_transform(DataPrep.train_news['Statement'].values)
+
+print(countV)
+print(train_count)
 
 #print training doc term matrix
 #we have matrix of size of (10240, 12196) by calling below
-train_count.shape
+def get_countVectorizer_stats():
+    
+    #vocab size
+    train_count.shape
 
-#check vocabulary using below command
-print(countV.vocabulary_)
+    #check vocabulary using below command
+    print(countV.vocabulary_)
 
-#get feature names
-print(countV.get_feature_names()[:25])
-
-#
+    #get feature names
+    print(countV.get_feature_names()[:25])
 
 
+#create tf-df frequency features
 #tf-idf 
 tfidfV = TfidfTransformer()
 train_tfidf = tfidfV.fit_transform(train_count)
-train_tfidf.shape
 
-#get train data feature names 
-print(train_tfidf.A[:10])
+def get_tfidf_stats():
+    train_tfidf.shape
+    #get train data feature names 
+    print(train_tfidf.A[:10])
 
 
 #bag of words - with n-grams
 #countV_ngram = CountVectorizer(ngram_range=(1,3),stop_words='english')
 #tfidf_ngram  = TfidfTransformer(use_idf=True,smooth_idf=True)
-tfidf_ngram = TfidfVectorizer(stop_words='english',ngram_range=(1,3),use_idf=True,smooth_idf=True)
+
+tfidf_ngram = TfidfVectorizer(stop_words='english',ngram_range=(1,4),use_idf=True,smooth_idf=True)
 
 
-#Usinng Word2Vec 
-model = gensim.models.Word2Vec(X, size=100) # x be tokenized text
-w2v = dict(zip(model.wv.index2word, model.wv.syn0))
+#POS Tagging
+tagged_sentences = nltk.corpus.treebank.tagged_sents()
+
+cutoff = int(.75 * len(tagged_sentences))
+training_sentences = DataPrep.train_news['Statement']
+ 
+print(training_sentences)
+
+#training POS tagger based on words
+def features(sentence, index):
+    """ sentence: [w1, w2, ...], index: the index of the word """
+    return {
+        'word': sentence[index],
+        'is_first': index == 0,
+        'is_last': index == len(sentence) - 1,
+        'is_capitalized': sentence[index][0].upper() == sentence[index][0],
+        'is_all_caps': sentence[index].upper() == sentence[index],
+        'is_all_lower': sentence[index].lower() == sentence[index],
+        'prefix-1': sentence[index][0],
+        'prefix-2': sentence[index][:2],
+        'prefix-3': sentence[index][:3],
+        'suffix-1': sentence[index][-1],
+        'suffix-2': sentence[index][-2:],
+        'suffix-3': sentence[index][-3:],
+        'prev_word': '' if index == 0 else sentence[index - 1],
+        'next_word': '' if index == len(sentence) - 1 else sentence[index + 1],
+        'has_hyphen': '-' in sentence[index],
+        'is_numeric': sentence[index].isdigit(),
+        'capitals_inside': sentence[index][1:].lower() != sentence[index][1:]
+    }
+    
+    
+#helper function to strip tags from tagged corpus	
+def untag(tagged_sentence):
+    return [w for w, t in tagged_sentence]
+
+
+
+#Using Word2Vec 
+with open("glove.6B.50d.txt", "rb") as lines:
+    w2v = {line.split()[0]: np.array(map(float, line.split()[1:]))
+           for line in lines}
+
+
+
+#model = gensim.models.Word2Vec(X, size=100) # x be tokenized text
+#w2v = dict(zip(model.wv.index2word, model.wv.syn0))
 
 
 class MeanEmbeddingVectorizer(object):
@@ -94,6 +133,7 @@ class MeanEmbeddingVectorizer(object):
         ])
 
 
+"""
 class TfidfEmbeddingVectorizer(object):
     def __init__(self, word2vec):
         self.word2vec = word2vec
@@ -121,16 +161,4 @@ class TfidfEmbeddingVectorizer(object):
                 for words in X
             ])
 
-
-svm2_pipeline_w2v = Pipeline([
-         ('w2v',MeanEmbeddingVectorizer(w2v)),
-         ('svm2_clf',SGDClassifier(loss='hinge',penalty='l2',alpha=1e-3, n_iter=5))
-         ])
-
-svm2_pipeline_w2v_tfidf = Pipeline([
-         ('w2v',TfidfEmbeddingVectorizer(w2v)),
-         ('svm2_clf',SGDClassifier(loss='hinge',penalty='l2',alpha=1e-3, n_iter=5))
-         ])
-
-
-
+"""
