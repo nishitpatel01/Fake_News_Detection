@@ -8,9 +8,14 @@ Created on Sat Nov  4 12:00:49 2017
 import pandas as pd
 import csv
 import numpy as np
+import nltk
 from nltk.stem import SnowballStemmer
+from nltk.stem.porter import PorterStemmer
 from nltk.tokenize import word_tokenize
 import seaborn as sb
+
+#before reading the files, setup the working directory to point to project repo
+#reading data files 
 
 
 test_filename = 'test.csv'
@@ -21,36 +26,60 @@ train_news = pd.read_csv(train_filename)
 test_news = pd.read_csv(test_filename)
 valid_news = pd.read_csv(valid_filename)
 
+
+
 #data observation
-print(train_news.shape)
-print(train_news.head(10))
+def data_obs():
+    print("training dataset size:")
+    print(train_news.shape)
+    print(train_news.head(10))
 
-print(test_news.shape)
-print(test_news.head(10))
+    #below dataset were used for testing and validation purposes
+    print(test_news.shape)
+    print(test_news.head(10))
+    
+    print(valid_news.shape)
+    print(valid_news.head(10))
 
-#distribution of classes
-sb.countplot(x='Label',data=train_news, palette='hls')
-sb.countplot(x='Label',data=test_news, palette='hls')
-sb.countplot(x='Label',data=valid_news, palette='hls')
+#check the data by calling below function
+#data_obs()
 
-#training data seems to be failry evenly distributed
+#distribution of classes for prediction
+def create_distribution(dataFile):
+    
+    return sb.countplot(x='Label', data=dataFile, palette='hls')
+    
+
+#by calling below we can see that training, test and valid data seems to be failry evenly distributed between the classes
+create_distribution(train_news)
+create_distribution(test_news)
+create_distribution(valid_news)
 
 
 #data integrity check (missing label values)
 #none of the datasets contains missing values therefore no cleaning required
-train_news.isnull().sum()
-train_news.info()
+def data_qualityCheck():
+    
+    print("Checking data qualitites...")
+    train_news.isnull().sum()
+    train_news.info()
+        
+    print("check finished.")
 
-test_news.isnull().sum()
-test_news.info()
+    #below datasets were used to 
+    test_news.isnull().sum()
+    test_news.info()
 
-valid_news.isnull().sum()
-valid_news.info()
+    valid_news.isnull().sum()
+    valid_news.info()
+
+#run the below function call to see the quality check results
+#data_qualityCheck()
 
 
 
-eng_stemmer = SnowballStemmer('english')
-stopwords = set(nltk.corpus.stopwords.words('english'))
+#eng_stemmer = SnowballStemmer('english')
+#stopwords = set(nltk.corpus.stopwords.words('english'))
 
 #Stemming
 def stem_tokens(tokens, stemmer):
@@ -112,10 +141,6 @@ def create_trigrams(words):
 """
 
 
-test_news = pd.read_csv(test_filename, header=None)
-
-from nltk.stem.porter import PorterStemmer
-
 porter = PorterStemmer()
 
 def tokenizer(text):
@@ -125,8 +150,8 @@ def tokenizer(text):
 def tokenizer_porter(text):
     return [porter.stem(word) for word in text.split()]
 
-doc = ['runners like running and thus they run','this is a test for tokens']
-tokenizer([word for line in test_news.iloc[:,1] for word in line.lower().split()])
+#doc = ['runners like running and thus they run','this is a test for tokens']
+#tokenizer([word for line in test_news.iloc[:,1] for word in line.lower().split()])
 
 #show the distribution of labels in the train and test data
 """def create_datafile(filename)
