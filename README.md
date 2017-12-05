@@ -58,7 +58,7 @@ A step by step series of examples that tell you have to get a development env ru
 
 1. The first step would be to clone this repo to your local machine. To do that you need to run following command in commanda prompt or in git bash
 ```
-$ git clone https://github.com/nishitpatel01/fake_news_detection_dev.git
+$ git clone https://github.com/nishitpatel01/Fake_News_Detection.git
 ```
 
 2. This will copy all the data source file, program files and model into your machine.
@@ -70,6 +70,7 @@ python prediction.py
 
 4. After hitting the enter, program will use for an input string which will be a piece of information or a news headline that you want to verify. Once you paste or type news headline, then press enter.
 
+5. Once you hit the enter, program will take user input (news headline) and will be used by model to classify in one of categories of "True" and "False". Along with classifying the news headline, model will also provide a probability of truth associated with it.
 
 End with an example of getting some data out of the system or using it for a little demo
 
