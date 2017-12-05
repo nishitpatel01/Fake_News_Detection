@@ -53,13 +53,13 @@ Below is the colomns used to create 3 datasets that have been in used in this pr
  
 You will see that newly created dataset has only 2 classes as compared to 6 from original classes. Below is method used for reducing the number of classes.
 
-* Original 	New
-* True		True
-* Mostly-true	True
-* Half-true	True
-* Barely-true	False
-* False		False
-* Pants-fire	False
+* Original 	--	New
+* True	   	--	True
+* Mostly-true	-- 	True
+* Half-true	-- 	True
+* Barely-true	-- 	False
+* False		-- 	False
+* Pants-fire	-- 	False
 
 The dataset used for this project were in csv format named train.csv, test.csv and valid.csv and can be found in repo. The original datasets are in "liar" folder in tsv format.
 
