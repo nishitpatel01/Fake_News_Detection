@@ -2,7 +2,7 @@
 
 Fake News Detection in Python
 
-This project is part of CS410:Text Information System course. We have used various natural language processing and machine learning libaries from python. 
+This project is part of CS410:Text Information System course. In this project, we have used various natural language processing techniques and machine learning algorithms to classifty fake news articles using sci-kit libraries from python. 
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ https://www.anaconda.com/download/
 
 
 #### Dataset used
-The data source used for this project is from LIAR dataset which has 3 files with .tsv format for test, train and validation. Below is some description about the data files used for this project.
+The data source used for this project is taken from LIAR dataset which has 3 files with .tsv format for test, train and validation. Below is some description about the data files used for this project.
 	
 LIAR: A BENCHMARK DATASET FOR FAKE NEWS DETECTION
 
@@ -47,8 +47,8 @@ the original dataset contained 13 variables/columns for train, test and validati
 
 To make things simple we have chosen only 2 variables from this original dataset for this classification. The other variables can be added later to add some more complexity and enhance the features.
 
-Below is the colomns used to create 3 datasets that have been in used in this project
-* Column 1: Statement.
+Below are the colomns used to create 3 datasets that have been in used in this project
+* Column 1: Statement (News headline or text).
 * Column 2: Label (Label class contains: True, False)
  
 You will see that newly created dataset has only 2 classes as compared to 6 from original classes. Below is method used for reducing the number of classes.
@@ -66,25 +66,30 @@ The dataset used for this project were in csv format named train.csv, test.csv a
 ### File descriptions
 
 #### DataPrep.py
-This file contains all the pre processing functions needed to process all input documents and texts. First we read the train, test and validation data files then some pre processing like tokenizing, stemming etc. There are some exploratory data analysis is performed like prediction class distribution and data quality checks like null or missing values.
+This file contains all the pre processing functions needed to process all input documents and texts. First we read the train, test and validation data files then performed some pre processing like tokenizing, stemming etc. There are some exploratory data analysis is performed like response variable distribution and data quality checks like null or missing values etc.
 
 #### FeatureSelection.py
-In this file we have used feature extraction and selection methods from sci-kit learn python libraries. for feature selection, we have used methods like simple bag-of-words and n-grams and then term frequency like tf-tdf weighting. we have also used word2vec and POS tagging to extract the feature.
+In this file we have performed feature extraction and selection methods from sci-kit learn python libraries. For feature selection, we have used methods like simple bag-of-words and n-grams and then term frequency like tf-tdf weighting. we have also used word2vec and POS tagging to extract the feature, though POS tagging and word2vec has not been used at this point due to the siez of pre-trained word2vec vector.
 
 #### classifier.py
-Here we have build all the classifiers for predicting the fake news detection. The extracted features are fed to different classfier. We have used Naive-bayes, Logistic Regression, Linear SVM, Stochastic gradient decent and Random forest. Each of the extracted featues were used in all of the classifiers. Once fitting the model, we compared the f1 score and checked the confusion matrix. After fitting all the classifiers, 2 best peforming models were selected as candidate models for fake news classification. Finally selected model was used for fake news detection with the probability of truth.
+Here we have build all the classifiers for predicting the fake news detection. The extracted features are fed into different classfiers. We have used Naive-bayes, Logistic Regression, Linear SVM, Stochastic gradient decent and Random forest classifiers from sklearn. Each of the extracted featues were used in all of the classifiers. Once fitting the model, we compared the f1 score and checked the confusion matrix. After fitting all the classifiers, 2 best peforming models were selected as candidate models for fake news classification. We have performed parameter tuning by implementing GridSearchCV methos on these candidate models and chosen best performing paramters for these classifier. Finally selected model was used for fake news detection with the probability of truth. In Addition to this, We have also extracted the top 50 features from our term-frequency tfidf vectorizer to see what words are most and important in each of the classes. We have also used learning curves to see how training and test set performs when we increase the amount of data in our classifiers.
 
 #### prediction.py
-This file uses the saved classification model to classify the news article from user. It takes an news article as input from user then model is used for final classification output that is shown to user along with probability of truth.
+Our finally selected and best performnig classifer was ```Logistic Regression``` which was then saved on disk with name ```final_model.sav```. Once you close this repository, this model will be copied to user's machine and will be used by prediction.py file to classify the fake news. It takes an news article as input from user then model is used for final classification output that is shown to user along with probability of truth.
 
 To looks the overall process flow of how the program and model is implemented, please take look at the Process-flow.jpg file from repo.
+
+### Performances
+
+### Next steps
+As we can see that our best performing models had an f1 score in the range of 70's. This is due to less number of data that we have used for training purposes and simplicity of our models. For the future implementations, we could introduce some more feature selection methods such as POS tagging, word2vec and topic modeling. In addition, we could also increase the training data size. We will extend this project to implement these techniques in future to increase the accuracy and performance of our models.
 
 
 ### Installing
 
 A step by step series of examples that tell you have to get a development env running
 
-1. The first step would be to clone this repo to your local machine. To do that you need to run following command in commanda prompt or in git bash
+1. The first step would be to clone this repo to your local machine. To do that you need to run following command in command prompt or in git bash
 ```
 $ git clone https://github.com/nishitpatel01/Fake_News_Detection.git
 ```
@@ -102,6 +107,7 @@ python prediction.py
 
 
 ### Members
-* Mandar Agashe
-* Nishit K Patel
-* Sachin Rao
+Team members of this project include
+* Mandar Agashe (magashe2@illinois.edu)
+* Nishit K Patel (nkp3@illinois.edu)
+* Sachin Rao (sachinr2@illinois.edu)
