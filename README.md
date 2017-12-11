@@ -63,8 +63,6 @@ You will see that newly created dataset has only 2 classes as compared to 6 from
 
 The dataset used for this project were in csv format named train.csv, test.csv and valid.csv and can be found in repo. The original datasets are in "liar" folder in tsv format.
 
-![alt text](https://github.com/nishitpatel01/Fake_News_Detection/blob/master/Project%20-%20cs410.jpg)
-
 
 ### File descriptions
 
@@ -80,7 +78,8 @@ Here we have build all the classifiers for predicting the fake news detection. T
 #### prediction.py
 Our finally selected and best performnig classifer was ```Logistic Regression``` which was then saved on disk with name ```final_model.sav```. Once you close this repository, this model will be copied to user's machine and will be used by prediction.py file to classify the fake news. It takes an news article as input from user then model is used for final classification output that is shown to user along with probability of truth.
 
-To looks the overall process flow of how the program and model is implemented, please take look at the Process-flow.jpg file from repo.
+Below is the Process Flow of the project:
+![alt text](https://github.com/nishitpatel01/Fake_News_Detection/blob/master/ProcessFlow.PNG)
 
 ### Performances
 
