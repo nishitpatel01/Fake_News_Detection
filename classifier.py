@@ -412,11 +412,11 @@ def plot_PR_curve(classifier):
     plt.ylabel('Precision')
     plt.ylim([0.0, 1.05])
     plt.xlim([0.0, 1.0])
-    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
+    plt.title('2-class Random Forest Precision-Recall curve: AP={0:0.2f}'.format(
               average_precision))
     
 plot_PR_curve(predicted_LogR_ngram)
-plot_PR_curve(predicted_nb_ngram)
+plot_PR_curve(predicted_rf_ngram)
 
 
 """
