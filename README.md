@@ -63,6 +63,9 @@ You will see that newly created dataset has only 2 classes as compared to 6 from
 
 The dataset used for this project were in csv format named train.csv, test.csv and valid.csv and can be found in repo. The original datasets are in "liar" folder in tsv format.
 
+![alt text](https://github.com/nishitpatel01/Fake_News_Detection/blob/master/Project%20-%20cs410.jpg)
+
+
 ### File descriptions
 
 #### DataPrep.py
