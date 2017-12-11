@@ -20,10 +20,12 @@ from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import KFold
-from sklearn.metrics import confusion_matrix, f1_score
+from sklearn.metrics import confusion_matrix, f1_score, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import learning_curve
 import matplotlib.pyplot as plt
+from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import average_precision_score
 
 #string to test
 doc_new = ['obama is running for president in 2016']
@@ -38,11 +40,8 @@ nb_pipeline = Pipeline([
         ('nb_clf',MultinomialNB())])
 
 nb_pipeline.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
-#nb_pipeline.predict(doc_new)
 predicted_nb = nb_pipeline.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_nb == DataPrep.test_news['Label'])
-#accuracy = 0.61
 
 
 #building classifier using logistic regression
@@ -52,10 +51,8 @@ logR_pipeline = Pipeline([
         ])
 
 logR_pipeline.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
 predicted_LogR = logR_pipeline.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_LogR == DataPrep.test_news['Label'])
-#accuracy = 0.61
 
 
 #building Linear SVM classfier
@@ -65,10 +62,8 @@ svm_pipeline = Pipeline([
         ])
 
 svm_pipeline.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
 predicted_svm = svm_pipeline.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_svm == DataPrep.test_news['Label'])
-#accuracy = 0.60
 
 
 #using SVM Stochastic Gradient Descent on hinge loss
@@ -78,11 +73,9 @@ sgd_pipeline = Pipeline([
         ])
 
 sgd_pipeline.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
-#svm2_pipeline.predict(doc_new)
 predicted_sgd = sgd_pipeline.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_sgd == DataPrep.test_news['Label'])
-#accurary = 0.58
+
 
 #random forest
 random_forest = Pipeline([
@@ -93,7 +86,6 @@ random_forest = Pipeline([
 random_forest.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
 predicted_rf = random_forest.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_rf == DataPrep.test_news['Label'])
-
 
 
 #User defined functon for K-Fold cross validatoin
@@ -149,9 +141,9 @@ build_confusion_matrix(random_forest)
 #f1-score: 0.610468748792
 
 #sgdclassifier
-# [2535 1953]
-# [2502 3250]
-# f1-Score: 0.590245654241
+# [2414 2074]
+# [2042 3710]
+# f1-Score: 0.640874558778
 
 #random forest classifier
 # [1821 2667]
@@ -159,13 +151,11 @@ build_confusion_matrix(random_forest)
 # f1-Score: 0.702651511011
 #=========================================================================================
 
-count_vect = CountVectorizer()
-X_train_counts = count_vect.fit_transform(DataPrep.train_news['Statement'].values)
-tf_transformer = TfidfTransformer(use_idf=False).fit(X_train_counts)
-X_train_tf = tf_transformer.transform(X_train_counts)
 
+"""So far we have used bag of words technique to extract the features and passed those featuers into classifiers. We have also seen the
+f1 scores of these classifiers. now lets enhance these features using term frequency weights with various n-grams
+"""
 
-"""Usinng n-grams, stopwords etc """
 ##Now using n-grams
 #naive-bayes classifier
 nb_pipeline_ngram = Pipeline([
@@ -173,10 +163,9 @@ nb_pipeline_ngram = Pipeline([
         ('nb_clf',MultinomialNB())])
 
 nb_pipeline_ngram.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
 predicted_nb_ngram = nb_pipeline_ngram.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_nb_ngram == DataPrep.test_news['Label'])
-#accuracy = 0.60
+
 
 #logistic regression classifier
 logR_pipeline_ngram = Pipeline([
@@ -185,10 +174,9 @@ logR_pipeline_ngram = Pipeline([
         ])
 
 logR_pipeline_ngram.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
 predicted_LogR_ngram = logR_pipeline_ngram.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_LogR_ngram == DataPrep.test_news['Label'])
-#accuracy = 0.62
+
 
 #linear SVM classifier
 svm_pipeline_ngram = Pipeline([
@@ -197,10 +185,9 @@ svm_pipeline_ngram = Pipeline([
         ])
 
 svm_pipeline_ngram.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
-
 predicted_svm_ngram = svm_pipeline_ngram.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_svm_ngram == DataPrep.test_news['Label'])
-#accuracy = 0.62
+
 
 #sgd classifier
 sgd_pipeline_ngram = Pipeline([
@@ -209,14 +196,12 @@ sgd_pipeline_ngram = Pipeline([
          ])
 
 sgd_pipeline_ngram.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
+predicted_sgd_ngram = sgd_pipeline_ngram.predict(DataPrep.test_news['Statement'])
+np.mean(predicted_sgd_ngram == DataPrep.test_news['Label'])
 
-predicted_sgd_ngram = sgd_pipeline_ngram.predict(DataPrep.train_news['Statement'])
-np.mean(predicted_sgd_ngram == DataPrep.train_news['Label'])
-#accurary = 0.57
 
 #random forest classifier
 random_forest_ngram = Pipeline([
-        #('rfCV',FeatureSelection.countV),
         ('rf_tfidf',FeatureSelection.tfidf_ngram),
         ('rf_clf',RandomForestClassifier(n_estimators=300,n_jobs=3))
         ])
@@ -224,7 +209,6 @@ random_forest_ngram = Pipeline([
 random_forest_ngram.fit(DataPrep.train_news['Statement'],DataPrep.train_news['Label'])
 predicted_rf_ngram = random_forest_ngram.predict(DataPrep.test_news['Statement'])
 np.mean(predicted_rf_ngram == DataPrep.test_news['Label'])
-#accuracy = 0.61
 
 
 #K-fold cross validation for all classifiers
@@ -263,27 +247,30 @@ build_confusion_matrix(random_forest_ngram)
 # f1-Score: 0.665720333284
 #=========================================================================================
 
-print(metrics.classification_report(DataPrep.test_news['Label'], predicted_nb_ngram))
-print(metrics.classification_report(DataPrep.test_news['Label'], predicted_LogR_ngram))
-print(metrics.classification_report(DataPrep.test_news['Label'], predicted_svm_ngram))
-print(metrics.classification_report(DataPrep.test_news['Label'], predicted_sgd_ngram))
-print(metrics.classification_report(DataPrep.test_news['Label'], predicted_rf_ngram))
+print(classification_report(DataPrep.test_news['Label'], predicted_nb_ngram))
+print(classification_report(DataPrep.test_news['Label'], predicted_LogR_ngram))
+print(classification_report(DataPrep.test_news['Label'], predicted_svm_ngram))
+print(classification_report(DataPrep.test_news['Label'], predicted_sgd_ngram))
+print(classification_report(DataPrep.test_news['Label'], predicted_rf_ngram))
 
+DataPrep.test_news['Label'].shape
 
-#out of all the models fitted, we would take 2 best performing model. we would call them candidate models
-# from the confusion matrix, we can see that random forest and logistic regression are best performing 
-# in terms of precision and recall (take a look into false positive and true negative counts which appeares
-# to be low compared to rest of the models)
+"""
+Out of all the models fitted, we would take 2 best performing model. we would call them candidate models
+from the confusion matrix, we can see that random forest and logistic regression are best performing 
+in terms of precision and recall (take a look into false positive and true negative counts which appeares
+to be low compared to rest of the models)
+"""
 
 #grid-search parameter optimization
 #random forest classifier parameters
 parameters = {'rf_tfidf__ngram_range': [(1, 1), (1, 2),(1,3),(1,4),(1,5)],
                'rf_tfidf__use_idf': (True, False),
-               'rf_clf__max_depth': (1,2,3,4,5,6,7,8,9,10)
+               'rf_clf__max_depth': (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
 }
 
 gs_clf = GridSearchCV(random_forest_ngram, parameters, n_jobs=-1)
-gs_clf = gs_clf.fit(DataPrep.train_news['Statement'][:5000],DataPrep.train_news['Label'][:5000])
+gs_clf = gs_clf.fit(DataPrep.train_news['Statement'][:10000],DataPrep.train_news['Label'][:10000])
 
 gs_clf.best_score_
 gs_clf.best_params_
@@ -349,13 +336,6 @@ forest model with n-gram has better accuracty than with the parameter estimated.
 has almost similar performance as n-gram model so logistic regression will be out choice of model for prediction.
 """
 
-doc_new = ["Brazil built a $300 million stadium in the Amazon rainforest that is only going to be used for four World Cup games, and theres no team that can fill it afterwards."]
-
-logR_pipeline_ngram.predict(doc_new)
-
-x = logR_pipeline_ngram.predict_proba(doc_new)
-print(x[0][1])
-
 #saving best model to the disk
 model_file = 'final_model.sav'
 pickle.dump(logR_pipeline_ngram,open(model_file,'wb'))
@@ -415,6 +395,29 @@ by plotting the learning cureve for logistic regression, it can be seen that cro
 is unable to learn from data. Also we see that there are high errors that indicates model is simple and we may want to increase the
 model complexity.
 """
+
+
+#plotting Precision-Recall curve
+def plot_PR_curve(classifier):
+    
+    precision, recall, thresholds = precision_recall_curve(DataPrep.test_news['Label'], classifier)
+    average_precision = average_precision_score(DataPrep.test_news['Label'], classifier)
+    
+    plt.step(recall, precision, color='b', alpha=0.2,
+             where='post')
+    plt.fill_between(recall, precision, step='post', alpha=0.2,
+                     color='b')
+    
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.ylim([0.0, 1.05])
+    plt.xlim([0.0, 1.0])
+    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(
+              average_precision))
+    
+plot_PR_curve(predicted_LogR_ngram)
+plot_PR_curve(predicted_nb_ngram)
+
 
 """
 Now let's extract the most informative feature from ifidf vectorizer for all fo the classifiers and see of there are any common
