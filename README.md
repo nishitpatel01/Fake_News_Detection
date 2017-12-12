@@ -124,16 +124,16 @@ $ git clone https://github.com/nishitpatel01/Fake_News_Detection.git
 
     - Once you hit the enter, program will take user input (news headline) and will be used by model to classify in one of  categories of "True" and "False". Along with classifying the news headline, model will also provide a probability of truth associated with it.
 
-5. If you have chosen to install python (and already setup PATH variable for ```python.exe```) then follow instructions:
-   - Open the command prompt and change the directory to project folder as mentioned in above by running below command
-  ```
-  cd C:/your cloned project folder path goes here/
-  ```
-   - run below command
-  ```
-  python.exe C:/your cloned project folder path goes here/
-  ```
-   - After hitting the enter, program will ask for an input which will be a piece of information or a news headline that you 	    	   want to verify. Once you paste or type news headline, then press enter.
+5.  If you have chosen to install python (and already setup PATH variable for ```python.exe```) then follow instructions:
+    - Open the command prompt and change the directory to project folder as mentioned in above by running below command
+    ```
+    cd C:/your cloned project folder path goes here/
+    ```
+    - run below command
+    ```
+    python.exe C:/your cloned project folder path goes here/
+    ```
+    - After hitting the enter, program will ask for an input which will be a piece of information or a news headline that you 	    	   want to verify. Once you paste or type news headline, then press enter.
 
     - Once you hit the enter, program will take user input (news headline) and will be used by model to classify in one of  categories of "True" and "False". Along with classifying the news headline, model will also provide a probability of truth associated with it.
 
