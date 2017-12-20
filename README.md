@@ -104,13 +104,13 @@ Below is the learning curves for our candidate models.
 **Logistic Regression Classifier**
 
 <p align="center">
-  <img width="550" height="500" src="https://github.com/nishitpatel01/Fake_News_Detection/blob/master/images/LR_LCurve.PNG">
+  <img width="550" height="450" src="https://github.com/nishitpatel01/Fake_News_Detection/blob/master/images/LR_LCurve.PNG">
 </p>
 
 **Random Forest Classifier**
 
 <p align="center">
-  <img width="550" height="500" src="https://github.com/nishitpatel01/Fake_News_Detection/blob/master/images/RF_LCurve.png">
+  <img width="550" height="450" src="https://github.com/nishitpatel01/Fake_News_Detection/blob/master/images/RF_LCurve.png">
 </p>
 
 ### Next steps
