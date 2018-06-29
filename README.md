@@ -2,7 +2,7 @@
 
 Fake News Detection in Python
 
-This project is part of CS410:Text Information System course. In this project, we have used various natural language processing techniques and machine learning algorithms to classifty fake news articles using sci-kit libraries from python. 
+In this project, we have used various natural language processing techniques and machine learning algorithms to classifty fake news articles using sci-kit libraries from python. 
 
 ## Getting Started
 
