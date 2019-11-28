@@ -19,7 +19,7 @@ from sklearn.linear_model import  LogisticRegression
 from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix, f1_score, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import learning_curve
@@ -91,11 +91,11 @@ np.mean(predicted_rf == DataPrep.test_news['Label'])
 #User defined functon for K-Fold cross validatoin
 def build_confusion_matrix(classifier):
     
-    k_fold = KFold(n=len(DataPrep.train_news), n_folds=5)
+    k_fold = KFold(n_splits=5)
     scores = []
     confusion = np.array([[0,0],[0,0]])
 
-    for train_ind, test_ind in k_fold:
+    for train_ind, test_ind in k_fold.split(DataPrep.train_news):
         train_text = DataPrep.train_news.iloc[train_ind]['Statement'] 
         train_y = DataPrep.train_news.iloc[train_ind]['Label']
     
