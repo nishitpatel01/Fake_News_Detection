@@ -39,7 +39,7 @@ The data source used for this project is LIAR dataset which contains 3 files wit
 	
 LIAR: A BENCHMARK DATASET FOR FAKE NEWS DETECTION
 
-William Yang Wang, "Liar, Liar Pants on Fire": A New Benchmark Dataset for Fake News Detection, to appear in Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (ACL 2017), short paper, Vancouver, BC, Canada, July 30-August 4, ACL.
+William Yang Wang, "Liar, Liar Pants on Fire": A New Benchmark Dataset for Fake News Detection, to appear in Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (ACL 2017), short paper, Vancouver, BC, Canada, July 30-August 4, ACL. The dataset contains a decade-long, 12.8K manually labeled short statements in various contexts, which provides detailed analysis report and links to source documents for each case.
 
 the original dataset contained 13 variables/columns for train, test and validation sets as follows:
 
