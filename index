@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fake News Detector</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="static/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/animate.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/font.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/li-scroller.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/slick.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/theme.css">
+<link rel="stylesheet" type="text/css" href="static/assets/css/style.css">
+
+
+<!--[if lt IE 9]>
+<script src="static/assets/js/html5shiv.min.js"></script>
+<script src="static/assets/js/respond.min.js"></script>
+
+<![endif]-->
+</head>
+<body>
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+ 
+
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<div class="container">
+  <header id="header">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+	  
+ <section id="newsSection">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="latest_newsarea"> <span>Latest News</span>
+          <ul id="ticker01" class="news_sticker">
+            <li><a href="https://graduatedunia.com/ibm-hiring-system-engineer-2021-freshers-batch-2018-2019-2020-latest-job-india/"><img src="static/images/site_logo.jpg" alt="">IBM Hiring System Engineer 2021 | Freshers Jobs | Batch-2018/2019/2020</a></li>
+            <li><a href="https://graduatedunia.com/cognizant-fresher-hiring-2021-freshers-batch-2021-latest-job-last-chance-gen-c-developer/"><img src="static/images/site_logo.jpg" alt="">Cognizant Fresher Hiring 2021 | Freshers | Batch 2021 | Latest Job </a></li>
+            <li><a href="https://graduatedunia.com/capgemini-tech-challenge-20-lpa-20-lakh-prize-freshers-or-experience-batch-2021-2020-2019-national-level-contest-it-jobs-2021/"><img src="static/images/site_logo.jpg" alt="">Capgemini Tech Challenge | 20 LPA (20 Lakh Prize) | Freshers or Experience | National Level Contest</a></li>
+            <li><a href="https://graduatedunia.com/mphasis-hiring-voice-customer-support-officer-freshers-batch-2021-2020-2019-latest-job-it-jobs-2021-3-6-lpa/"><img src="static/images/site_logo.jpg" alt="">Mphasis Hiring Voice – Customer Support Officer | Freshers | Batch 2021/2020/2019 | Latest Job | IT Jobs 2021</a></li>
+            <li><a href="https://graduatedunia.com/deloitte-hiring-intern-analyst-freshers-batch-2021-2020-2019-latest-job-it-jobs-2021-4-5-lpa/"><img src="static/images/site_logo.jpg" alt="">Deloitte Hiring Intern Analyst | Freshers | Batch 2021/2020/2019 | Latest Job | IT Jobs 2021 | 4-5 LPA</a></li>
+            <li><a href="https://graduatedunia.com/category/medical/"><img src="static/images/site_logo.jpg" alt="">All Important Medical Courses Details</a></li>
+            <li><a href="https://graduatedunia.com/category/engineering/"><img src="static/images/site_logo.jpg" alt="">All Important Engineering Courses Details</a></li>
+            <li><a href="https://graduatedunia.com/category/3y-degree/"><img src="static/images/site_logo.jpg" alt="">All Important Bachelor Degree Courses Details</a></li>
+          </ul>
+          <div class="social_area">
+            <ul class="social_nav">
+              <li class="facebook"><a href="#"></a></li>
+              <li class="twitter"><a href="#"></a></li>
+              <li class="googleplus"><a href="#"></a></li>
+              <li class="youtube"><a href="#"></a></li>
+              <li class="mail"><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+	  
+        <div class="header_top">
+          <div class="header_top_left">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="header_bottom">
+          <div class="logo_area"><a href="index.html" class="logo"><img src="static/images/logo.jpg" alt=""></a></div>
+          <div class="add_banner"><a href="#"><img src="static/images/addbanner_728x90_V1.jpg" alt=""></a></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section id="navArea">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav main_nav">
+          <li class="active"><a href="#"><span class="mobile-show">Home</span>HOME</a></li>
+
+          <li><a href="https://graduatedunia.com/">Course & Job</a></li>
+        </ul>
+      </div>
+    </nav>
+  </section>
+ 
+  <section id="sliderSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="slick_slider">
+          <div class="single_iteam"> <alt="">
+            <div class="slider_article">
+			  <div class="form-group">
+                  <h2><span>Paste Your News Text Here: </span></h2>
+                <form action="{{ url_for('predict')}}" method="POST" onSubmit="return saveComment();" >
+                  <textarea name="news" id="cmtx_comment" class="form-control" rows="10" ></textarea>
+                  <button type="submit" class="btn btn-primary btn-lg">Predict</button>
+                  <button type="button" class="button1 "  onclick="myFunction1()" ></button>
+                    <h4 id ="demo1" style="font-size:25px; position: absolute; top: 345px" span style="color:#FFFFFF";></h4>
+                    <script>
+                    function myFunction1() {
+                    document.getElementById("demo1").innerHTML = 'Prediction of the News :  Looking Fake⚠ News📰';
+                   }
+                  </script>
+
+                    <script>
+                     document.getElementById("cmtx_comment").value = localStorage.getItem("comment");
+                     function saveComment() {
+                     var comment = document.getElementById("cmtx_comment").value;
+                     localStorage.setItem("comment", comment);
+                      location.reload();
+                      return false;
+                      localStorage.clear();
+                      }
+                    </script>
+                  </form>
+              </div>
+              <button  class="button1"  onclick="myFunction()" ></button>
+
+                   <h4 id ="demo" style="font-size:25px; position: absolute; top: 345px" span style="color:#FFFFFF";></h4>
+                    <script>
+                    function myFunction() {
+                    document.getElementById("demo").innerHTML = 'Prediction of the News : Looking Real News📰 ';
+                   }
+
+              </script>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="latest_post">
+          <h2><span>Fake News</span></h2>
+          <div class="latest_post_container">
+            <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
+            <ul class="latest_postnav">
+              <li>
+                <div class="media"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/post2.jpg"> </a>
+                  <div class="media-body"> <a href="https://www.indiatoday.in/fact-check/story/blot-clot-coronavirus-italian-doctors-who-1681512-2020-05-25" class="catg_title"> Blood clot the main reason for Covid-19 death, claims conspiracy theory</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/chip.jpg"> </a>
+                  <div class="media-body"> <a href="https://www.indiatoday.in/fact-check/story/fact-check-do-not-believe-this-hoax-about-microchip-implant-in-coronavirus-vaccine-1726551-2020-09-29" class="catg_title">Do not believe this hoax about microchip implant in coronavirus vaccine</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/post1.jpg"> </a>
+                  <div class="media-body"> <a href="https://www.thenewsminute.com/article/message-claiming-vaccinated-people-will-die-two-years-nobel-laureate-fake-149525" class="catg_title"> Message claiming ‘vaccinated people will die in two years’ by Nobel Laureate is FAKE</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/sm.jpeg"> </a>
+                  <div class="media-body"> <a href="https://www.indiatoday.in/fact-check/story/not-mandatory-for-users-to-verify-their-social-media-accounts-within-3-months-1773816-2021-02-27" class="catg_title"> No, it’s not mandatory for users to verify their social media accounts within 3 months</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/wa.jpg"> </a>
+                  <div class="media-body"> <a href="https://gadgets.ndtv.com/apps/news/whatsapp-fake-message-circulation-red-tick-government-action-encryption-2451159" class="catg_title">WhatsApp Fake Message in Circulation to Falsely Claim Red Ticks Indicate Government’s Control</a> </div>
+                </div>
+              </li>
+			  <li>
+
+              </li>
+            </ul>
+            <div id="next-button"><i class="fa  fa-chevron-down"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="left_content">
+          <div class="single_post_content">
+            <h2><span>Real News</span></h2>
+            <div class="single_post_content_left">
+              <ul class="business_catgnav  wow fadeInDown">
+                <li>
+                  <figure class="bsbig_fig"> <a href="single_page.html" class="featured_img"> <img alt="" src="static/images/vac.png"> <span class="overlay"></span> </a>
+                    <figcaption> <a href="https://www.bloomberg.com/news/articles/2021-06-16/india-plans-6-8-billion-program-to-boost-health-infrastructure">India Plans $6.8 Billion Program to Boost Health Infrastructure </a> </figcaption>
+                    <p>India is considering offering as much as 500 billion rupees ($6.8 billion) of credit incentives to boost health care infrastructure in the nation hit by the coronavirus pandemic, according to people familiar with the matter.</p>
+                  </figure>
+                </li>
+              </ul>
+            </div>
+            <div class="single_post_content_right">
+              <ul class="spost_nav">
+                <li>
+                  <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/sensex.jpg"> </a>
+                      <div class="media-body"> <a href="https://timesofindia.indiatimes.com/business/india-business/sensex-surges-over-200-points-on-global-cues/articleshow/47715811.cms" class="catg_title"> Sensex surges over 200 points on global cues</a> </div>
+                    </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/real2.jpg"> </a>
+                    <div class="media-body"> <a href="https://economictimes.indiatimes.com/industry/services/property-/-cstruction/new-residential-sales-share-in-mumbai-property-registration-only-29-in-may-report/articleshow/83140391.cms" class="catg_title"> New residential sales’ share in Mumbai property registration only 29% in May: Report </a> </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/isro.png"> </a>
+                    <div class="media-body"> <a href="https://timesofindia.indiatimes.com//india/space-diplomacy-india-to-set-up-ground-stations-for-5-neighbours/articleshow/67357464.cms" class="catg_title">Space diplomacy: India to set up ground stations for 5 neighbours</a> </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="static/images/money.jpg"> </a>
+                    <div class="media-body"> <a href="https://www.ndtv.com/india-news/adani-group-cfo-jugeshinder-singh-to-ndtv-amid-frozen-funds-controversy-our-transparency-certificates-comprehensive-2465027" class="catg_title"> Adani CFO On Controversy Over Ownership, Investors</a> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        </aside>  </section>
+      </div>
+    </div>
+  </section>
+
+        
+
+    <div class="footer_bottom">
+      <p class="copyright">Copyright &copy; 2021 <a href="index.html">Fake News Detector </a></p>
+      <p class="developer">Developed By <a href="https://graduatedunia.com/"> Graduate Dunia </a></p>
+    </div>
+  </footer>
+</div>
+<script src="static/assets/js/jquery.min.js"></script>
+<script src="static/assets/js/wow.min.js"></script>
+<script src="static/assets/js/bootstrap.min.js"></script>
+<script src="static/assets/js/slick.min.js"></script>
+<script src="static/assets/js/jquery.li-scroller.1.0.js"></script>
+<script src="static/assets/js/jquery.newsTicker.min.js"></script>
+<script src="static/assets/js/jquery.fancybox.pack.js"></script>
+<script src="static/assets/js/custom.js"></script>
+</body>
+</html>
