@@ -1,0 +1,3 @@
+@font-face{font-family:"Oswald"; font-style:normal; font-weight:400; src:local("Oswald Regular"),local("Oswald-Regular"),url("..static/fonts/Oswald-Regular-400.woff") format("woff")}
+@font-face{font-family:"Varela"; font-style:normal; font-weight:400; src:local("Varela"),url("..static/fonts/Varela-400.woff") format("woff")}
+@font-face{font-family:"Open Sans"; font-style:normal; font-weight:400; src:local("Open Sans"),local("OpenSans"),url("..static/fonts/OpenSans-400.woff") format("woff")}

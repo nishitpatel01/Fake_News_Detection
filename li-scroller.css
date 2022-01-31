@@ -1,0 +1,10 @@
+/* liScroll styles */
+
+.tickercontainer{width:100%; height:30px; margin:0; padding:0; overflow:hidden; padding-top:2px}
+.tickercontainer .mask{left:10px; overflow:hidden; position:relative; top:0; width:100%; height:20px; overflow:hidden; margin-top:4px}
+ul.newsticker{position:relative; left:750px; font:bold 10px Verdana; list-style-type:none; margin:0; padding:0}
+ul.newsticker li{float:left; margin:0; padding:0}
+ul.newsticker a{white-space:nowrap; padding:0; color:#fff; margin:0 50px 0 0}
+ul.newsticker a:hover{text-decoration:underline}
+ul.newsticker span{margin:0 10px 0 0}
+ul.newsticker a > img{height:20px; margin-right:5px; width:25px}

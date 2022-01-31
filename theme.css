@@ -1,0 +1,39 @@
+.scrollToTop{background-color:#d083cf; color:#fff}
+.scrollToTop:hover, .scrollToTop:focus{background-color:#fff; color:#d083cf; border-color:1px solid #d083cf}
+.logo > span{color:#d083cf}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus{background-color:#d083cf}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{background-color:#d083cf}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background-color:#d083cf}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{background-color:#d083cf}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background-color:#d083cf}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{background-color:#d083cf}
+.latest_newsarea span{background:none repeat scroll 0 0 #d083cf}
+.latest_post > h2 span{background:none repeat scroll 0 0 #d083cf}
+#prev-button{color:#d083cf}
+#next-button{color:#d083cf}
+.single_post_content > h2 span{background:none repeat scroll 0 0 #d083cf}
+.single_sidebar > h2 span{ background:none repeat scroll 0 0 #d083cf}
+.bsbig_fig figcaption a:hover{color:#d083cf}
+.spost_nav .media-body > a:hover{color:#d083cf}
+.cat-item a:hover{background-color:#d083cf}
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus{background-color:#d083cf}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{background-color:#d083cf}
+.single_sidebar > ul > li a:hover{color:#d083cf}
+.footer_widget > h2:hover{color:#d083cf}
+.tag_nav li a:hover{color:#d083cf; border-color:#d083cf}
+.copyright a:hover{color:#d083cf}
+.post_commentbox a:hover, .post_commentbox span:hover{color:#d083cf}
+.breadcrumb{border-left:10px solid #d083cf}
+.single_page_content ul li:before{background-color:#d083cf}
+.single_page_content h2, .single_page_content h3, .single_page_content h4, .single_page_content h5, .single_page_content h6{color:#d083cf}
+.nav-slit .icon-wrap{background-color:#d083cf}
+.nav-slit h3{background:#d083cf}
+.catgArchive{background-color:#d083cf}
+.error_page > h3{color:#d083cf}
+.error_page > span{background:none repeat scroll 0 0 #d083cf}
+.error_page > a{background-color:#d083cf}
+.contact_area > h2{background-color:#d083cf}
+.contact_form input[type="submit"]{background-color:#d083cf}
+.contact_form input[type="submit"]:hover{background-color:#fff; color:#d083cf}
+.related_post > h2 i{color:#d083cf}
+.form-control:focus{border-color:#d083cf;  box-shadow:0 0px 1px #d083cf inset,0 0 5px #d083cf}
