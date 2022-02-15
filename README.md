@@ -1,4 +1,4 @@
-# Fake News Detection
+# Fake News Detection - An Amazingg AI Tool
 
 Fake News Detection in Python
 
