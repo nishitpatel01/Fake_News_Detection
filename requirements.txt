@@ -1,0 +1,8 @@
+Flask==2.3.2
+gensim==4.3.1
+matplotlib==3.7.2
+nltk==3.8.1
+numpy==1.19.2
+pandas==2.0.3
+scikit_learn==0.22.2.post1
+seaborn==0.12.2
