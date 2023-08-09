@@ -124,6 +124,7 @@ A step by step series of examples that tell you have to get a development env ru
 1. The first step would be to clone this repo in a folder in your local machine. To do that you need to run following command in command prompt or in git bash
 ```
 $ git clone https://github.com/nishitpatel01/Fake_News_Detection.git
+$ pip install -r requirements.txt
 ```
 
 2. This will copy all the data source file, program files and model into your machine.
